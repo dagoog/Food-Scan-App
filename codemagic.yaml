@@ -34,10 +34,10 @@ workflows:
       - build/ios/iphoneos/Runner.ipa
 
     publishing:
-      # Email notifications (optional - remove if not needed)
+      # Email notifications
       emails:
         notify:
           on_success: true
           on_failure: false
         recipients:
-          - recipient-email@example.com
+          - dagoog38@gmail.com
