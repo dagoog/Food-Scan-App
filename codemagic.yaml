@@ -1,0 +1,57 @@
+# Codemagic CI/CD Configuration for FoodScan iOS App
+# See: https://docs.codemagic.io/
+
+workflows:
+  ios-workflow:
+    name: iOS Build - FoodScan
+    max_build_duration: 45
+
+    environment:
+      # Flutter version
+      flutter: 3.24.0
+
+      # iOS signing configuration
+      groups:
+        - app_store_connect_api_key
+
+      # CocoaPods cache
+      cocoapods:
+        cache: true
+        pods_path: ios/Pods
+
+    cache_directories:
+      - ~/Pods
+      - ~/.cocoapods
+
+    scripts:
+      # Install dependencies
+      - flutter pub get
+
+      # Install CocoaPods dependencies
+      - cd ios && pod install && cd ..
+
+      # Build iOS app
+      - flutter build ios --release --no-codesign
+
+    artifacts:
+      # IPA file for TestFlight
+      - build/ios/iphoneos/Runner.ipa
+      # Build logs
+      - build/
+
+    publishing:
+      # Email notifications
+      emails:
+        - recipient-email@example.com
+        subject: "[FoodScan] iOS Build Notification"
+        notify:
+          on_success: true
+          on_failure: true
+
+      # Scripts to sign and upload to App Store Connect
+      scripts:
+        - name: Sign and upload to App Store Connect
+          script: |
+            # This requires App Store Connect API key configuration
+            # See: https://docs.codemagic.io/code-signing-yaml/signing-ios/
+            echo "Configure App Store Connect API key in Codemagic dashboard"
