@@ -11,9 +11,6 @@ workflows:
       xcode: latest
       cocoapods: default
 
-    cache_directories:
-      - $(pwd)/ios/Pods
-
     scripts:
       # Install Flutter dependencies
       - flutter pub get
@@ -28,4 +25,3 @@ workflows:
 
     artifacts:
       - build/ios/iphoneos/Runner.ipa
-      - $(pwd)/ios/Pods
