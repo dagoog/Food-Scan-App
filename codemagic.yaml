@@ -10,10 +10,6 @@ workflows:
       # Flutter version
       flutter: 3.24.0
 
-      # iOS signing configuration
-      groups:
-        - app_store_connect_api_key
-
       # CocoaPods cache
       cocoapods:
         cache: true
@@ -34,24 +30,14 @@ workflows:
       - flutter build ios --release --no-codesign
 
     artifacts:
-      # IPA file for TestFlight
+      # IPA file for download
       - build/ios/iphoneos/Runner.ipa
-      # Build logs
-      - build/
 
     publishing:
-      # Email notifications
+      # Email notifications (optional - remove if not needed)
       emails:
-        - recipient-email@example.com
-        subject: "[FoodScan] iOS Build Notification"
         notify:
           on_success: true
-          on_failure: true
-
-      # Scripts to sign and upload to App Store Connect
-      scripts:
-        - name: Sign and upload to App Store Connect
-          script: |
-            # This requires App Store Connect API key configuration
-            # See: https://docs.codemagic.io/code-signing-yaml/signing-ios/
-            echo "Configure App Store Connect API key in Codemagic dashboard"
+          on_failure: false
+        recipients:
+          - recipient-email@example.com
