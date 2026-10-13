@@ -7,37 +7,25 @@ workflows:
     max_build_duration: 45
 
     environment:
-      # Flutter version
       flutter: 3.24.0
-
-      # CocoaPods cache
-      cocoapods:
-        cache: true
-        pods_path: ios/Pods
+      xcode: latest
+      cocoapods: default
 
     cache_directories:
-      - ~/Pods
-      - ~/.cocoapods
+      - $(pwd)/ios/Pods
 
     scripts:
-      # Install dependencies
+      # Install Flutter dependencies
       - flutter pub get
 
       # Install CocoaPods dependencies
-      - cd ios && pod install && cd ..
+      - cd ios
+      - pod install
+      - cd ..
 
       # Build iOS app
       - flutter build ios --release --no-codesign
 
     artifacts:
-      # IPA file for download
       - build/ios/iphoneos/Runner.ipa
-
-    publishing:
-      # Email notifications
-      emails:
-        notify:
-          on_success: true
-          on_failure: false
-        recipients:
-          - dagoog38@gmail.com
+      - $(pwd)/ios/Pods
