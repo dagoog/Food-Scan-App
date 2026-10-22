@@ -309,7 +309,7 @@ class HomeTab extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: provider.scanHistory.take(5).length,
-          separatorBuilder: (_, __) => const Divider(height: 1),
+          separatorBuilder: (context, index) => const Divider(height: 1),
           itemBuilder: (context, index) {
             final scan = provider.scanHistory[index];
             return ListTile(

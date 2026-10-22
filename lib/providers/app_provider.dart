@@ -249,9 +249,4 @@ class AppProvider with ChangeNotifier {
     _lastScan = null;
     notifyListeners();
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

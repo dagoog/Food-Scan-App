@@ -219,7 +219,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: product.ingredients!.length,
-          separatorBuilder: (_, __) => const Divider(height: 1),
+          separatorBuilder: (context, index) => const Divider(height: 1),
           itemBuilder: (context, index) {
             final ingredient = product.ingredients![index];
             final isMatched = matchedItems.any((id) => id == ingredient.id ||
@@ -459,7 +459,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemCount: ingredients.length,
-                  separatorBuilder: (_, __) => const Divider(height: 1),
+                  separatorBuilder: (context, index) => const Divider(height: 1),
                   itemBuilder: (context, index) {
                     final ingredient = ingredients[index];
                     final isSelected = provider.avoidList.any(
@@ -510,23 +510,31 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
 
                         try {
                           await provider.addToAvoidList(newItem);
-                          if (mounted) {
+                          if (!mounted) return;
+                          final successMessage = 'Added "${ingredient.name}" to avoid list';
+                          // Show snackbar outside async context
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            if (!mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text('Added "${ingredient.name}" to avoid list'),
+                                content: Text(successMessage),
                                 backgroundColor: Colors.green,
                               ),
                             );
-                          }
+                          });
                         } catch (e) {
-                          if (mounted) {
+                          if (!mounted) return;
+                          final errorMessage = 'Failed to add: ${e.toString()}';
+                          // Show snackbar outside async context
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            if (!mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text('Failed to add: ${e.toString()}'),
+                                content: Text(errorMessage),
                                 backgroundColor: Colors.red,
                               ),
                             );
-                          }
+                          });
                         }
                       },
                     );

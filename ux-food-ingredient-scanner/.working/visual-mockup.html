@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodScan - Design Mockup</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a; 
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        /* Phone Frame */
+        .phone {
+            width: 320px;
+            height: 600px;
+            background: #111;
+            border-radius: 40px;
+            padding: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .phone-inner {
+            width: 100%;
+            height: 100%;
+            background: #FAFAFA;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Status Bar */
+        .status-bar {
+            height: 30px;
+            background: #10B981;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        /* App Bar */
+        .app-bar {
+            height: 50px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 14px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .app-bar h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+        }
+        .app-bar.golden .app-bar h1 { color: white; }
+        .app-bar.golden { background: #10B981; border: none; }
+        
+        /* Content */
+        .content {
+            padding: 12px;
+            overflow-y: auto;
+            height: calc(100% - 130px);
+        }
+        
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        
+        /* Safety Badge */
+        .safety-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 11px;
+        }
+        .safety-safe { background: #D1FAE5; color: #065F46; }
+        .safety-caution { background: #FEF3C7; color: #92400E; }
+        .safety-avoid { background: #FEE2E2; color: #991B1B; }
+        
+        /* Stat Row */
+        .stat-row {
+            display: flex;
+            justify-content: space-around;
+            padding: 14px;
+            background: #ECFDF5;
+            border-radius: 14px;
+            margin-bottom: 14px;
+        }
+        .stat { text-align: center; }
+        .stat-value { font-size: 20px; font-weight: 700; color: #10B981; }
+        .stat-label { font-size: 10px; color: #6B7280; margin-top: 3px; }
+        
+        /* Product Row */
+        .product-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+        .product-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .product-info { flex: 1; }
+        .product-name { font-weight: 600; color: #1F2937; font-size: 12px; }
+        .product-sub { font-size: 10px; color: #6B7280; margin-top: 2px; }
+        .product-arrow { color: #9CA3AF; }
+        
+        /* FAB */
+        .fab {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 48px;
+            height: 48px;
+            background: #10B981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+        
+        /* Bottom Nav */
+        .bottom-nav {
+            height: 70px;
+            background: white;
+            border-top: 1px solid #E5E7EB;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding-top: 6px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            color: #9CA3AF;
+            font-size: 9px;
+        }
+        .nav-item.active { color: #10B981; }
+        .nav-icon { font-size: 20px; }
+        
+        /* Section */
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1F2937;
+            margin: 16px 0 10px;
+        }
+        
+        /* Color Header */
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .header h1 { font-size: 24px; margin-bottom: 8px; }
+        .header p { color: #888; font-size: 14px; }
+        
+        /* Screens Container */
+        .screens {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        /* Screen Label */
+        .screen-label {
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            margin-bottom: 8px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🥬 FoodScan - Design Preview</h1>
+        <p>Fresh & Modern | Green (#10B981) | Gentle Safety Indicators</p>
+    </div>
+    
+    <div class="screens">
+        <!-- Home Screen -->
+        <div>
+            <div class="screen-label">Home Screen</div>
+            <div class="phone">
+                <div class="phone-inner">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <span>●●●○</span>
+                    </div>
+                    
+                    <div class="app-bar golden">
+                        <h1>FoodScan</h1>
+                        <span>★</span>
+                    </div>
+                    
+                    <div class="content">
+                        <div class="stat-row">
+                            <div class="stat">
+                                <div class="stat-value">24</div>
+                                <div class="stat-label">Scans</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8</div>
+                                <div class="stat-label">Avoided</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">Yes</div>
+                                <div class="stat-label">Premium</div>
+                            </div>
+                        </div>
+                        
+                        <div class="section-title">Last Scan</div>
+                        <div class="card">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="product-icon" style="background: #D1FAE5;">✓</div>
+                                <div class="product-info">
+                                    <div class="product-name">Organic Almond Milk</div>
+                                    <div class="product-sub">SAFE TO EAT</div>
+                                </div>
+                                <span class="product-arrow">›</span>
+                            </div>
+                        </div>
+                        
+                        <div class="section-title">Quick Actions</div>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <div style="padding: 10px 14px; background: #D1FAE5; border-radius: 12px; font-size: 12px; color: #065F46;">📷 Scan</div>
+                            <div style="padding: 10px 14px; background: #F3F4F6; border-radius: 12px; font-size: 12px; color: #4B5563;">🔍 Search</div>
+                        </div>
+                        
+                        <div class="section-title">Recent Scans</div>
+                        <div class="product-row">
+                            <div class="product-icon" style="background: #D1FAE5;">✓</div>
+                            <div class="product-info">
+                                <div class="product-name">Organic Bananas</div>
+                                <div class="product-sub">Safe • 2h ago</div>
+                            </div>
+                        </div>
+                        <div class="product-row">
+                            <div class="product-icon" style="background: #FEF3C7;">⚠</div>
+                            <div class="product-info">
+                                <div class="product-name">Fruit Gummies</div>
+                                <div class="product-sub">Caution • 5h ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fab">+</div>
+                    
+                    <div class="bottom-nav">
+                        <div class="nav-item active">
+                            <span class="nav-icon">◉</span>
+                            <span>Home</span>
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-icon">☰</span>
+                            <span>List</span>
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-icon">◎</span>
+                            <span>Library</span>
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-icon">⚙</span>
+                            <span>Settings</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Safety States Screen -->
+        <div>
+            <div class="screen-label">Safety Status States</div>
+            <div class="phone">
+                <div class="phone-inner">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <span>●●●○</span>
+                    </div>
+                    
+                    <div class="app-bar">
+                        <h1>Product Details</h1>
+                    </div>
+                    
+                    <div class="content">
+                        <div class="card">
+                            <div class="safety-badge safety-safe">✓ Safe to Eat</div>
+                            <h3 style="margin-top: 14px; font-size: 16px;">Organic Almond Milk</h3>
+                            <p style="color: #6B7280; font-size: 12px; margin-top: 6px;">No ingredients on your avoid list</p>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="safety-badge safety-caution">⚠ Caution</div>
+                            <h3 style="margin-top: 14px; font-size: 16px;">Fruit Gummy Bears</h3>
+                            <p style="color: #6B7280; font-size: 12px; margin-top: 6px;">Contains 2 ingredients you may want to review</p>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="safety-badge safety-avoid">✗ Avoid</div>
+                            <h3 style="margin-top: 14px; font-size: 16px;">Protein Bar</h3>
+                            <p style="color: #6B7280; font-size: 12px; margin-top: 6px;">Contains: Peanuts (on your avoid list)</p>
+                        </div>
+                        
+                        <div class="section-title">Ingredients</div>
+                        <div style="padding: 12px; background: #FEF3C7; border-radius: 10px; margin-bottom: 10px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 4px; height: 20px; background: #F59E0B; border-radius: 2px;"></div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 12px; font-weight: 600; color: #92400E;">Artificial Colors</div>
+                                    <div style="font-size: 10px; color: #92400E;">May cause sensitivity in some individuals</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button style="width: 100%; padding: 12px; background: #10B981; color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 14px;">
+                            + Add to Avoid List
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Avoid List Screen -->
+        <div>
+            <div class="screen-label">Avoid List</div>
+            <div class="phone">
+                <div class="phone-inner">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <span>●●●○</span>
+                    </div>
+                    
+                    <div class="app-bar">
+                        <h1>Avoid List</h1>
+                        <span style="color: #F59E0B;">★</span>
+                    </div>
+                    
+                    <div class="content">
+                        <div style="padding: 12px; background: #F3F4F6; border-radius: 12px; margin-bottom: 12px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span style="font-size: 16px;">🔍</span>
+                                <input type="text" placeholder="Search ingredients..." style="border: none; background: transparent; flex: 1; font-size: 14px; outline: none;" />
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="width: 35px; height: 35px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 14px;">P</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; color: #1F2937; font-size: 13px;">Peanuts</div>
+                                    <div style="font-size: 10px; color: #6B7280;">Allergen</div>
+                                </div>
+                                <div style="padding: 3px 8px; background: #F3F4F6; border-radius: 10px; font-size: 10px; color: #6B7280;">12x</div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="width: 35px; height: 35px; background: #EF4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 14px;">D</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; color: #1F2937; font-size: 13px;">Dairy</div>
+                                    <div style="font-size: 10px; color: #6B7280;">Allergen</div>
+                                </div>
+                                <div style="padding: 3px 8px; background: #F3F4F6; border-radius: 10px; font-size: 10px; color: #6B7280;">8x</div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="width: 35px; height: 35px; background: #F59E0B; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 14px;">A</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; color: #1F2937; font-size: 13px;">Artificial Colors</div>
+                                    <div style="font-size: 10px; color: #6B7280;">Additive</div>
+                                </div>
+                                <div style="padding: 3px 8px; background: #F3F4F6; border-radius: 10px; font-size: 10px; color: #6B7280;">5x</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fab">+</div>
+                    
+                    <div class="bottom-nav">
+                        <div class="nav-item">
+                            <span class="nav-icon">◉</span>
+                            <span>Home</span>
+                        </div>
+                        <div class="nav-item active">
+                            <span class="nav-icon">☰</span>
+                            <span>List</span>
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-icon">◎</span>
+                            <span>Library</span>
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-icon">⚙</span>
+                            <span>Settings</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Color Palette Screen -->
+        <div>
+            <div class="screen-label">Color Palette</div>
+            <div class="phone">
+                <div class="phone-inner" style="background: #1a1a1a;">
+                    <div class="status-bar" style="background: transparent; color: white;">
+                        <span>Colors</span>
+                        <span>◆</span>
+                    </div>
+                    
+                    <div class="content">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <div style="text-align: center;">
+                                <div style="height: 60px; background: #10B981; border-radius: 12px; margin-bottom: 8px;"></div>
+                                <div style="color: white; font-size: 10px;">Primary</div>
+                                <div style="color: #666; font-size: 9px; font-family: monospace;">#10B981</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="height: 60px; background: #059669; border-radius: 12px; margin-bottom: 8px;"></div>
+                                <div style="color: white; font-size: 10px;">Dark</div>
+                                <div style="color: #666; font-size: 9px; font-family: monospace;">#059669</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="height: 60px; background: #D1FAE5; border-radius: 12px; margin-bottom: 8px;"></div>
+                                <div style="color: #1a1a1a; font-size: 10px;">Safe</div>
+                                <div style="color: #666; font-size: 9px; font-family: monospace;">#D1FAE5</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="height: 60px; background: #FEF3C7; border-radius: 12px; margin-bottom: 8px;"></div>
+                                <div style="color: #1a1a1a; font-size: 10px;">Caution</div>
+                                <div style="color: #666; font-size: 9px; font-family: monospace;">#FEF3C7</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="height: 60px; background: #FEE2E2; border-radius: 12px; margin-bottom: 8px;"></div>
+                                <div style="color: #1a1a1a; font-size: 10px;">Avoid</div>
+                                <div style="color: #666; font-size: 9px; font-family: monospace;">#FEE2E2</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="height: 60px; background: #F59E0B; border-radius: 12px; margin-bottom: 8px;"></div>
+                                <div style="color: white; font-size: 10px;">Premium</div>
+                                <div style="color: #666; font-size: 9px; font-family: monospace;">#F59E0B</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 20px; padding: 14px; background: #2a2a2a; border-radius: 12px;">
+                            <div style="color: white; font-size: 12px; margin-bottom: 10px;">Typography</div>
+                            <div style="color: white; font-size: 24px; font-weight: 700;">Display Large</div>
+                            <div style="color: #888; font-size: 14px; margin-top: 4px;">SF Pro Display</div>
+                        </div>
+                        
+                        <div style="margin-top: 12px; padding: 14px; background: #2a2a2a; border-radius: 12px;">
+                            <div style="color: white; font-size: 12px; margin-bottom: 10px;">Rounded Corners</div>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <div style="width: 20px; height: 20px; background: #10B981; border-radius: 4px;"></div>
+                                <div style="width: 24px; height: 24px; background: #10B981; border-radius: 8px;"></div>
+                                <div style="width: 28px; height: 28px; background: #10B981; border-radius: 12px;"></div>
+                                <div style="width: 32px; height: 32px; background: #10B981; border-radius: 16px;"></div>
+                                <div style="width: 30px; height: 30px; background: #10B981; border-radius: 50%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

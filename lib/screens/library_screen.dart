@@ -14,7 +14,7 @@ class LibraryScreen extends StatefulWidget {
 
 class _LibraryScreenState extends State<LibraryScreen> {
   final _searchController = TextEditingController();
-  String _selectedSection = 'Allergens';
+  final _selectedSection = 'Allergens';
 
   @override
   void dispose() {
@@ -201,13 +201,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
             ],
           ),
         ),
-        Container(
+        SizedBox(
           height: 60,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             itemCount: items.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 8),
+            separatorBuilder: (context, index) => const SizedBox(width: 8),
             itemBuilder: (context, index) {
               return _buildIngredientChip(items[index], color);
             },
